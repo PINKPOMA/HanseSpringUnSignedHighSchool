@@ -60,7 +60,8 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         h = Input.GetAxis("Horizontal");
-        transform.Translate(Vector2.right * h * moveSpeed *Time.deltaTime);
+        Vector2 velocity = Vector2.right * h * moveSpeed;
+        GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
     private void OnCollisionEnter2D(Collision2D col)
