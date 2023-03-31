@@ -25,10 +25,14 @@ public class Title_Mgr : MonoBehaviour
 
     IEnumerator TitleFade()
     {
-        var anim = m_TitleInputImg.DOFade(0.1f, 1f);
-        yield return anim.WaitForCompletion();
-        var anim2 = m_TitleInputImg.DOFade(1.1f, 1f);
-        yield return anim2.WaitForCompletion();
+        //var anim = m_TitleInputImg.DOFade(0.1f, 1f);
+        m_TitleInputImg.DOFade(0.1f, 1f);
+        //yield return anim.WaitForCompletion();
+        yield return new WaitForSeconds(1.2f);
+        //var anim2 = m_TitleInputImg.DOFade(1.1f, 1f);
+        m_TitleInputImg.DOFade(1.1f, 1f);
+        //yield return anim2.WaitForCompletion();
+        yield return new WaitForSeconds(1.2f);
         StartCoroutine("TitleFade");
     }
 }
