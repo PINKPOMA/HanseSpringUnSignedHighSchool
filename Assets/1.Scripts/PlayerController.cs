@@ -129,7 +129,6 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isJump && !isWall) 
         {
-            Debug.Log("점프");
             m_JumpCount++;
             _rigidbody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
             _rigidbody.sharedMaterial = Friction0;
@@ -141,7 +140,6 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space) && isWall)
         {
-            Debug.Log("대쉬");
             if (!isWall) return;
             Debug.Log(direction);
             h = Input.GetAxis("Horizontal");
