@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isJump;
     [SerializeField] private bool isWall;
     [SerializeField] private bool isWallDash;
+    [SerializeField] private bool isPlayerOver;
     [SerializeField] private PhysicsMaterial2D Friction0;
 
     private int direction;
@@ -246,4 +247,5 @@ public class PlayerController : MonoBehaviour
             _rigidbody.sharedMaterial = Friction0;
         }
     }
+    
 }
