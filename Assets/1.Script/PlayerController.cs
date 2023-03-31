@@ -173,5 +173,20 @@ public class PlayerController : MonoBehaviour
             m_FrictionTime = 0.0f;
             m_JumpCount = 0;
         }
+
+        if (col.transform.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Enemy"))
+        {
+            col.GetComponent<Monster>().Dead();
+            _rigidbody.AddForce(Vector2.up * 7, ForceMode2D.Impulse);
+            _rigidbody.sharedMaterial = Friction0;
+        }
     }
 }
