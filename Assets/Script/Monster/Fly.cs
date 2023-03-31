@@ -6,6 +6,7 @@ using UnityEngine;
 public class Fly : Monster
 {
     private Vector2 movePos;
+    private Vector2 targetPos;
     private void Start()
     {
         StartCoroutine(Flying());
@@ -23,5 +24,12 @@ public class Fly : Monster
         movePos = Vector2.up;
         yield return new WaitForSeconds(1f);
         StartCoroutine(Flying());
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        StopCoroutine(Flying());
+        targetPos = col.transform.position;
+        
     }
 }
