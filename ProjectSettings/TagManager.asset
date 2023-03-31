@@ -9,6 +9,7 @@ TagManager:
   - Red
   - Yellow
   - Enemy
+  - Wall
   layers:
   - Default
   - TransparentFX
