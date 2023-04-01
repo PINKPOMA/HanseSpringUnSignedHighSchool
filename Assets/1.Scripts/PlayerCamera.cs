@@ -74,9 +74,9 @@ public class PlayerCamera : MonoBehaviour
         }
 
     }
-    // void OnDrawGizmos() //������ �׻� ����
-    // {
-    //     Gizmos.color = Color.red;
-    //     Gizmos.DrawCube(center, mapSize); //���簢�� �׸���
-    // }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(center, mapSize);
+    }
 }
