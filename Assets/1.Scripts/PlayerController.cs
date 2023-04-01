@@ -57,6 +57,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.s_GameState != Game_State.Play)
+            return;
+
         m_ColorCurTime -= Time.deltaTime;
 
         if (ColorGageBar != null)
@@ -142,6 +145,9 @@ public class PlayerController : MonoBehaviour
     {                                                                                                                                                                                                                   
         if (isWallDash) return;
         h = Input.GetAxis("Horizontal");
+
+        if (h == 0)
+            _rigidbody.velocity = new Vector2(0.0f, _rigidbody.velocity.y);
 
         if (transform.position.y <= -10.0f)
             transform.position = StartPoint.transform.position;

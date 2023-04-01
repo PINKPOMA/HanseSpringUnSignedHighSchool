@@ -52,6 +52,9 @@ public class PlayerCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (GameManager.s_GameState != Game_State.Play)
+            return;
+
         float lx = mapSize.x - width;
         float clampX = Mathf.Clamp(transform.position.x, center.x - lx, center.x + lx);
 
