@@ -118,14 +118,26 @@ public class PlayerController : MonoBehaviour
     
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && m_JumpCount < 2) 
+        if (1 < m_JumpCount)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.Space) && !isJump) 
         {
             m_JumpCount++;
             _rigidbody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
             //_rigidbody.sharedMaterial = Friction0;
             isJump = true;
-            Invoke("JumpCount_Down", 1.0f);
+            Debug.Log(m_JumpCount);
+            Invoke("JumpCount_Down", 1.0f); 
         }
+        else if(Input.GetKeyDown(KeyCode.Space) && isJump)
+        {
+            m_JumpCount++;
+            _rigidbody.AddForce(Vector2.up * (jumpSpeed / 2.0f), ForceMode2D.Impulse);
+            Debug.Log(m_JumpCount);
+            //Invoke("JumpCount_Down", 1.0f);
+        }
+
         //else if (Input.GetKeyDown(KeyCode.Space) && isWall)
         //{
         //    if (!isWall) return;
@@ -143,7 +155,7 @@ public class PlayerController : MonoBehaviour
 
     private void JumpCount_Down()
     {
-        m_JumpCount--;
+        m_JumpCount = 0;
     }
 
     private void Move()
@@ -153,18 +165,19 @@ public class PlayerController : MonoBehaviour
 
         if (0 < h)
         {
-            dustParticleSystem.Play();
             anim.SetBool("IsMove", true);
             transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+            dustParticleSystem.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
             //_sprite.flipX = true;
         }
         else if (h < 0f)
-        {dustParticleSystem.Play();
+        {
             anim.SetBool("IsMove", true);
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            dustParticleSystem.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
         else
-        {dustParticleSystem.Pause();
+        {
             anim.SetBool("IsMove", false);
             _rigidbody.velocity = new Vector2(0.0f, _rigidbody.velocity.y);
         }
@@ -212,7 +225,14 @@ public class PlayerController : MonoBehaviour
         velocity.x = Math.Clamp(velocity.x, -moveSpeed, moveSpeed);
 
         if (isJump)
-            velocity.x = velocity.x * 0.85f;
+            velocity.x = velocity.x * 0.75f;
+        else
+        {
+            if (0 < h)
+                dustParticleSystem.Play();
+            else if (h < 0)
+                dustParticleSystem.Play();
+        }
 
         _rigidbody.velocity = velocity;
     }
