@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
    {
       monsterArray = GameObject.FindGameObjectsWithTag("Enemy");
       monsterCount = monsterArray.Length;
-      monsterCountText.text = $"남은 몬스터: {monsterCount} 마리";
+      monsterCountText.text = $"Monster: {monsterCount}";
    }
 
    private void Update()
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
    public void MonsterCountDown()
    {
       monsterCount--;
-      monsterCountText.text = $"남은 몬스터: {monsterCount} 마리";
+      monsterCountText.text = $"Monster: {monsterCount}";
       if (monsterCount <= 0)
       {
          StageClearUI.SetActive(true);

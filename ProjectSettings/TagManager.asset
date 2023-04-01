@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - Wall
   - EndWall
+  - GameManager
   layers:
   - Default
   - TransparentFX
