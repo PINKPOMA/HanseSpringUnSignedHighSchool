@@ -21,7 +21,6 @@ public class PlayerCamera : MonoBehaviour
     {
         height = Camera.main.orthographicSize;
         width = height * Screen.width / Screen.height;
-
     }
     private void Update()
     {
@@ -57,20 +56,25 @@ public class PlayerCamera : MonoBehaviour
         float clampX = Mathf.Clamp(transform.position.x, center.x - lx, center.x + lx);
 
         float ly = mapSize.y - height;
-        float clampY = Mathf.Clamp(transform.position.y, center.y - ly, center.y + ly); ;
+        float clampY = Mathf.Clamp(transform.position.y, 0.0f, center.y + ly); ;
 
-        if(transform.position.x < center.x - lx || center.x + lx < transform.position.x)
-            return;
-
-        if (transform.position.x < cam.transform.position.x + -6.0f ||
-            cam.transform.position.x + 6.0f < transform.position.x)
+        if ((transform.position.x < cam.transform.position.x - 6.0f ||
+            cam.transform.position.x + 6.0f < transform.position.x))
         {
-            cam.transform.DOLocalMoveX(transform.position.x, 1.0f);
+            cam.transform.DOLocalMoveX(clampX, 1.0f);
         }
 
-        //changePos.x = transform.position.x;
-        //changePos.y = cam.transform.position.y;
-        //changePos.z = cam.transform.position.z;
-        //cam.transform.position = Vector3.Lerp(cam.transform.position, changePos, Time.deltaTime);
+        if ((transform.position.y < cam.transform.position.x - 3.0f ||
+            cam.transform.position.y + 3.0f < transform.position.x))
+        {
+            cam.transform.DOLocalMoveY(clampY, 1.0f);
+        }
+
     }
+
+    //void OnDrawGizmos() //씬에서 항상 보임
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawCube(center, mapSize); //정사각형 그리기
+    //}
 }

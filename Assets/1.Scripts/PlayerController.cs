@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     private Color Cur_Color = Color.white;  //현재 유저의 색
     private Color Next_Color = Color.white; //유저의 다음 색
 
-    private float m_ColorChangeTime = 3.0f;
+    private float m_ColorChangeTime = 2.0f;
     private float m_ColorCurTime = 0.0f;
 
     private int m_CurColorNum = 2;
@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _sprite;
     private Vector2 velocity = Vector2.zero;
     private Vector2 wallDashPos = Vector2.zero;
-    private float m_FrictionTime = 0.0f;    //벽면에 얼마나 붙어 있었는지 시간값을 저장할 변수
    [SerializeField] private int m_JumpCount = 0;
 
     private float h;
@@ -144,6 +143,9 @@ public class PlayerController : MonoBehaviour
         if (isWallDash) return;
         h = Input.GetAxis("Horizontal");
 
+        if (transform.position.y <= -10.0f)
+            transform.position = StartPoint.transform.position;
+
         #region ---- 수정 전
         //if(0.1f < m_FrictionTime)
         //{
@@ -194,13 +196,12 @@ public class PlayerController : MonoBehaviour
         {
             isJump = false;
             //_rigidbody.sharedMaterial = null;
-            m_FrictionTime = 0.0f;
             m_JumpCount = 0;
         }
 
         if (col.transform.CompareTag("Enemy"))
         {
-            Destroy(gameObject);
+            transform.position = StartPoint.transform.position;
         }
 
         //if (col.transform.CompareTag("Wall"))

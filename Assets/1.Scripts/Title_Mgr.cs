@@ -20,7 +20,7 @@ public class Title_Mgr : MonoBehaviour
             return;
 
         if (Input.anyKeyDown)
-            FadeMgr.Inst.SceneOut("SampleScene");
+            FadeMgr.Inst.SceneOut("1.Stage_01");
     }
 
     IEnumerator TitleFade()
