@@ -213,7 +213,8 @@ public class PlayerController : MonoBehaviour
         if (collisionInfo.transform.CompareTag("Wall"))
         {
             var dis = collisionInfo.transform.position.x - transform.position.x;
-            transform.Translate(new Vector2(dis, 0) * 3 * Time.deltaTime);
+            if(Math.Abs(dis)  >=15f)
+                transform.Translate(new Vector2(dis, 0) * 3 * Time.deltaTime);
         }
     }
 
