@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public class Walk : Monster
 {
+    private Animator anim = null;
     private SpriteRenderer _sprite;
     private bool isFlip;
     private int _dir = -1;
@@ -13,6 +14,7 @@ public class Walk : Monster
     private void Start()
     {
         _sprite = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -22,6 +24,19 @@ public class Walk : Monster
 
     private void Move()
     {
+        if (0 < _dir)
+        {
+            anim.SetBool("IsMove", true);
+            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        }
+        else if(_dir < 0)
+        {
+            anim.SetBool("IsMove", true);
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+        else
+            anim.SetBool("IsMove", false);
+
         transform.Translate(Vector3.left *_dir * moveSpeed * Time.deltaTime);
         
     }
