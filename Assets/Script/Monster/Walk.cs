@@ -8,6 +8,8 @@ public class Walk : Monster
 {
     private Animator anim = null;
     private SpriteRenderer _sprite;
+    [SerializeField] private Transform _groundCheck;
+    [SerializeField] private float _groundCheckRadius = 0.1f;
     private bool isFlip;
     private int _dir = -1;
 
@@ -37,35 +39,19 @@ public class Walk : Monster
         else
             anim.SetBool("IsMove", false);
 
-        transform.Translate(Vector3.left *_dir * moveSpeed * Time.deltaTime);
-        
-    }
+        transform.Translate(Vector3.left  * moveSpeed * Time.deltaTime);
 
-   private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.transform.CompareTag("Ground") && !isFlip)
+        if (!Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius))
         {
-            StartCoroutine(Delay());
+            transform.Rotate(0f, 180f, 0f);
         }
-    }
 
-   private IEnumerator Delay()
-   {
-       isFlip = true;
-       FlipObject();
-       yield return new WaitForSeconds(0.25f);
-       isFlip = false;
-   }
-   private void OnTriggerExit2D(Collider2D other)
-   {
-       if (other.CompareTag("Ground")&& !isFlip)  
-       {
-           StartCoroutine(Delay());
-       }
-   }
-    public void FlipObject()
+    }
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        _sprite.flipX = true;
-        _dir *= -1; 
+        if (col.transform.CompareTag("Ground"))
+        {
+            transform.Rotate(0f, 180f, 0f);
+        }
     }
 }

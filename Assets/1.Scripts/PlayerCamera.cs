@@ -74,7 +74,6 @@ public class PlayerCamera : MonoBehaviour
         }
 
     }
-    
     // void OnDrawGizmos() //������ �׻� ����
     // {
     //     Gizmos.color = Color.red;

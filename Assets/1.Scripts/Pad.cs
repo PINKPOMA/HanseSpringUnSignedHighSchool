@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Pad : MonoBehaviour
@@ -9,30 +10,28 @@ public class Pad : MonoBehaviour
     [SerializeField] private int dir = 1;
     [SerializeField] private bool isWidth;
     [SerializeField] private Vector3 value;
+    [SerializeField] private Vector3 maxPos;
     void Start()
     {
-        StartCoroutine(isWidth ?WidthPaded() : HeistPaded());
+        value = (isWidth ?  Vector3.left: Vector3.up) * speed * Time.deltaTime;
     }
 
     private void Update()
     {
-        transform.Translate(value);
+       transform.Translate(value);
+       if (Math.Abs(transform.position.x) > maxPos.x || Math.Abs(transform.position.y) > maxPos.y)
+       {
+           value.x *= -1;
+           value.y *= -1;
+       }
     }
 
-    IEnumerator HeistPaded()
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        value = Vector3.up * -dir * speed * Time.deltaTime;
-        yield return new WaitForSeconds(3f);
-        value = Vector3.down * -dir * speed * Time.deltaTime;
-        yield return new WaitForSeconds(3f);
-        StartCoroutine(HeistPaded());
-    }
-    IEnumerator WidthPaded()
-    {
-        value = Vector3.right * -dir * speed * Time.deltaTime; 
-        yield return new WaitForSeconds(3f);
-        value = Vector3.left * -dir * speed * Time.deltaTime; 
-        yield return new WaitForSeconds(3f);
-        StartCoroutine(WidthPaded());
+        if (col.transform.CompareTag("Ground"))
+        {
+            value.x *= -1;
+            value.y *= -1;
+        }
     }
 }
