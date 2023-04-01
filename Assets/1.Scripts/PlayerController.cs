@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 velocity = Vector2.zero;
     private Vector2 wallDashPos = Vector2.zero;
    [SerializeField] private int m_JumpCount = 0;
+   [SerializeField] private ParticleSystem dustParticleSystem;
 
    private Animator anim = null;
 
@@ -152,17 +153,18 @@ public class PlayerController : MonoBehaviour
 
         if (0 < h)
         {
+            dustParticleSystem.Play();
             anim.SetBool("IsMove", true);
             transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
             //_sprite.flipX = true;
         }
         else if (h < 0f)
-        {
+        {dustParticleSystem.Play();
             anim.SetBool("IsMove", true);
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
         else
-        {
+        {dustParticleSystem.Pause();
             anim.SetBool("IsMove", false);
             _rigidbody.velocity = new Vector2(0.0f, _rigidbody.velocity.y);
         }
