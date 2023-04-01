@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isWall;
     [SerializeField] private bool isWallDash;
     [SerializeField] private bool isPlayerOver;
-    [SerializeField] private PhysicsMaterial2D Friction0;
+    //[SerializeField] private PhysicsMaterial2D Friction0;
 
     private int direction;
 
@@ -108,30 +108,26 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isJump && !isWall) 
+        if (Input.GetKeyDown(KeyCode.Space) && m_JumpCount < 2) 
         {
             m_JumpCount++;
             _rigidbody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
-            _rigidbody.sharedMaterial = Friction0;
-
-            
-
-            if(2 <= m_JumpCount)
-                isJump = true;
+            //_rigidbody.sharedMaterial = Friction0;
+            isJump = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && isWall)
-        {
-            if (!isWall) return;
-            Debug.Log(direction);
-            h = Input.GetAxis("Horizontal");
-            wallDashPos.x = -dir * (moveSpeed / 2);
-            wallDashPos.y = 1.0f * jumpSpeed;
-            wallDashPos = wallDashPos.normalized * dashSpeed;
+        //else if (Input.GetKeyDown(KeyCode.Space) && isWall)
+        //{
+        //    if (!isWall) return;
+        //    Debug.Log(direction);
+        //    h = Input.GetAxis("Horizontal");
+        //    wallDashPos.x = -dir * (moveSpeed / 2);
+        //    wallDashPos.y = 1.0f * jumpSpeed;
+        //    wallDashPos = wallDashPos.normalized * dashSpeed;
     
             
-            StartCoroutine(WallDash());
+        //    StartCoroutine(WallDash());
 
-        }
+        //}
     }
 
     private IEnumerator WallDash()
@@ -140,7 +136,7 @@ public class PlayerController : MonoBehaviour
         //_rigidbody.AddForce(Vector2.right * -h * jumpSpeed, ForceMode2D.Impulse);
        // _rigidbody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
         _rigidbody.velocity = wallDashPos;
-        _rigidbody.sharedMaterial = Friction0;
+        //_rigidbody.sharedMaterial = Friction0;
         yield return new WaitForSeconds(0.75f);   
         isWallDash = false;
         isJump = true;
@@ -157,28 +153,47 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
         }
 
+        #region ---- ¼öÁ¤ Àü
+        //if(0.1f < m_FrictionTime)
+        //{
+        //    if (_rigidbody.sharedMaterial == null)
+        //        _rigidbody.sharedMaterial = Friction0;
+        //}
+        //else if(m_FrictionTime <= 0.0f)
+        //{
+        //    m_FrictionTime = 0.0f;
+        //    if (_rigidbody.sharedMaterial == Friction0)
+        //        _rigidbody.sharedMaterial = null;
+        //}
 
-        if(0.1f < m_FrictionTime)
-        {
-            if (_rigidbody.sharedMaterial == null)
-                _rigidbody.sharedMaterial = Friction0;
-        }
-        else if(m_FrictionTime <= 0.0f)
-        {
-            m_FrictionTime = 0.0f;
-            if (_rigidbody.sharedMaterial == Friction0)
-                _rigidbody.sharedMaterial = null;
-        }
+        //if (isJump)
+        //    velocity = Vector2.right * h * (moveSpeed / 2.0f);
+        //else
+        //    velocity = Vector2.right * h * moveSpeed;
+
+        //if (velocity.x == _rigidbody.velocity.x && velocity.y == 0.0f)
+        //    m_FrictionTime += Time.deltaTime;
+
+        //velocity.y = _rigidbody.velocity.y;
+
+        //velocity.x = Math.Clamp(velocity.x, -moveSpeed, moveSpeed);
+
+        //Debug.Log(velocity);
+
+        //_rigidbody.velocity = velocity;
+        #endregion
+
+        _rigidbody.AddForce(Vector2.right * h, ForceMode2D.Impulse);
+    }
+
+    private void LateUpdate()
+    {
+        velocity = _rigidbody.velocity;
+        velocity.x = Math.Clamp(velocity.x, -moveSpeed, moveSpeed);
 
         if (isJump)
-            velocity = Vector2.right * h * (moveSpeed / 2.0f);
-        else
-            velocity = Vector2.right * h * moveSpeed;
+            velocity.x = velocity.x * 0.85f;
 
-        if (velocity.x == _rigidbody.velocity.x && velocity.y == 0.0f)
-            m_FrictionTime += Time.deltaTime;
-
-        velocity.y = _rigidbody.velocity.y;
         _rigidbody.velocity = velocity;
     }
 
@@ -187,7 +202,7 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.CompareTag("Ground"))
         {
             isJump = false;
-            _rigidbody.sharedMaterial = null;
+            //_rigidbody.sharedMaterial = null;
             m_FrictionTime = 0.0f;
             m_JumpCount = 0;
         }
@@ -197,15 +212,15 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (col.transform.CompareTag("Wall"))
-        {
-            //direction = (int)h;
-            dir = -col.contacts[0].normal.x;
-            //m_JumpCount = 3;
-            //direction = col.contacts[0].point - (Vector2)transform.position;
-            //direction = direction.normalized;
-            isWall = true;
-        }
+        //if (col.transform.CompareTag("Wall"))
+        //{
+        //    //direction = (int)h;
+        //    dir = -col.contacts[0].normal.x;
+        //    //m_JumpCount = 3;
+        //    //direction = col.contacts[0].point - (Vector2)transform.position;
+        //    //direction = direction.normalized;
+        //    isWall = true;
+        //}
     }
 
     private void OnCollisionStay2D(Collision2D collisionInfo)
@@ -233,7 +248,7 @@ public class PlayerController : MonoBehaviour
         {
             col.GetComponent<Monster>().Dead();
             _rigidbody.AddForce(Vector2.up * 7, ForceMode2D.Impulse);
-            _rigidbody.sharedMaterial = Friction0;
+            //_rigidbody.sharedMaterial = Friction0;
         }
     }
     
