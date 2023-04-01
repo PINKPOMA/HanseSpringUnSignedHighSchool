@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
         transform.position = StartPoint.transform.position;
 
         m_ColorList.Add(Color.yellow);
-        m_ColorList.Add(Color.green);
+        m_ColorList.Add(Color.blue);
         m_ColorList.Add(Color.red);
 
         ColorChange();
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
         if (m_ColorCurTime <= 0.0f)
         {
-         //   ColorChange();
+            ColorChange();
         }
 
         Move();
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         if (m_CurColorNum == 0)
             gameObject.layer = 6;
         else if (m_CurColorNum == 1)
-            gameObject.layer = 7;
+            gameObject.layer = 9;
         else if (m_CurColorNum == 2)
             gameObject.layer = 8;
 
@@ -103,27 +103,7 @@ public class PlayerController : MonoBehaviour
 
         CurColorKnob.color = Next_Color;
     }
-
-    private void Dummy()
-    {
-        if (Input.GetKeyDown(KeyCode.F1)) //yellow
-        {
-            gameObject.layer = 6;
-            _sprite.color = Color.yellow;
-        }
-
-        if (Input.GetKeyDown(KeyCode.F2)) //Green
-        {
-            gameObject.layer = 7;
-            _sprite.color = Color.green;
-        }
-
-        if (Input.GetKeyDown(KeyCode.F3)) //Red
-        {
-            gameObject.layer = 8;
-            _sprite.color = Color.red;
-        }
-    }
+    
 
     private void Jump()
     {
