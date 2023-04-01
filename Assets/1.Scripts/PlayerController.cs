@@ -192,12 +192,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Ground"))
-        {
-            isJump = false;
-            //_rigidbody.sharedMaterial = null;
-            m_JumpCount = 0;
-        }
+       
 
         if (col.transform.CompareTag("Enemy"))
         {
@@ -227,6 +222,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.gameObject.CompareTag("Ground"))
+        {
+            isJump = false;
+            //_rigidbody.sharedMaterial = null;
+            m_JumpCount = 0;
+        }
         if (col.CompareTag("Enemy"))
         {
             col.GetComponent<Monster>().Dead();

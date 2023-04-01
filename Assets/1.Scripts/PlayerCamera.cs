@@ -64,17 +64,17 @@ public class PlayerCamera : MonoBehaviour
             cam.transform.DOLocalMoveX(clampX, 1.0f);
         }
 
-        if ((transform.position.y < cam.transform.position.x - 3.0f ||
-            cam.transform.position.y + 3.0f < transform.position.x))
+        if ((transform.position.y < cam.transform.position.x - 2.0f ||
+            cam.transform.position.y + 2.0f < transform.position.x))
         {
-            cam.transform.DOLocalMoveY(clampY, 1.0f);
+            cam.transform.DOLocalMoveY(clampY, 2.0f);
         }
 
     }
-
-    //void OnDrawGizmos() //¾À¿¡¼­ Ç×»ó º¸ÀÓ
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawCube(center, mapSize); //Á¤»ç°¢Çü ±×¸®±â
-    //}
+    
+    void OnDrawGizmos() //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×»ï¿½ ï¿½ï¿½ï¿½ï¿½
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(center, mapSize); //ï¿½ï¿½ï¿½ç°¢ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
+    }
 }
