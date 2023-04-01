@@ -6,6 +6,6 @@ public class jumpScript : MonoBehaviour
 {
     public void Des()
     {
-        Destroy(gameObject);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
     }
 }
