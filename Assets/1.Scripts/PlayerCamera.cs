@@ -58,14 +58,14 @@ public class PlayerCamera : MonoBehaviour
         float ly = mapSize.y - height;
         float clampY = Mathf.Clamp(transform.position.y, 0.0f, center.y + ly); ;
 
-        if ((transform.position.x < cam.transform.position.x - 6.0f ||
-            cam.transform.position.x + 6.0f < transform.position.x))
+        if (transform.position.x < cam.transform.position.x - 6.0f ||
+            cam.transform.position.x + 6.0f < transform.position.x)
         {
             cam.transform.DOLocalMoveX(clampX, 1.0f);
         }
 
-        if ((transform.position.y < cam.transform.position.x - 2.0f ||
-            cam.transform.position.y + 2.0f < transform.position.x))
+        if (transform.position.y < cam.transform.position.y - 2.0f ||
+            cam.transform.position.y + 2.0f < transform.position.y)
         {
             cam.transform.DOLocalMoveY(clampY, 2.0f);
         }
