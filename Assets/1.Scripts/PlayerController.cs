@@ -39,12 +39,15 @@ public class PlayerController : MonoBehaviour
     private Vector2 wallDashPos = Vector2.zero;
    [SerializeField] private int m_JumpCount = 0;
 
+   private Animator anim = null;
+
     private float h;
 
     void Start()
     {
         _rigidbody = gameObject.GetComponent<Rigidbody2D>();
         _sprite = gameObject.GetComponent<SpriteRenderer>();
+        anim = gameObject.GetComponent<Animator>();
 
         transform.position = StartPoint.transform.position;
 
@@ -72,7 +75,6 @@ public class PlayerController : MonoBehaviour
 
         Move();
         Jump();
-        //Dummy();
         
     }
 
@@ -80,18 +82,27 @@ public class PlayerController : MonoBehaviour
     {
         m_ColorCurTime = m_ColorChangeTime;
 
-        //빨 -> 노 -> 초 순으로 순환
+        // //노 파 빨 순으로 순환
         Cur_Color = m_ColorList[m_CurColorNum];
-
+        
         ColorGageBar.color = Cur_Color;
-        _sprite.color = Cur_Color;
 
         if (m_CurColorNum == 0)
+        {
             gameObject.layer = 6;
+            anim.SetInteger("ColorNum", 0);
+        }
         else if (m_CurColorNum == 1)
+        {
             gameObject.layer = 8;
+            anim.SetInteger("ColorNum", 1);
+        }
         else if (m_CurColorNum == 2)
+        {
             gameObject.layer = 7;
+            anim.SetInteger("ColorNum", 2);
+        }
+            
 
         
         m_CurColorNum++;
@@ -104,7 +115,6 @@ public class PlayerController : MonoBehaviour
         CurColorKnob.color = Next_Color;
     }
     
-
     private void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && m_JumpCount < 2) 
@@ -146,8 +156,25 @@ public class PlayerController : MonoBehaviour
         if (isWallDash) return;
         h = Input.GetAxis("Horizontal");
 
-        if (h == 0)
+        
+
+        if (0 < h)
+        {
+            anim.SetBool("IsMove", true);
+            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+            //_sprite.flipX = true;
+        }
+        else if (h < 0f)
+        {
+            anim.SetBool("IsMove", true);
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+        else
+        {
+            anim.SetBool("IsMove", false);
             _rigidbody.velocity = new Vector2(0.0f, _rigidbody.velocity.y);
+        }
+            
 
         if (transform.position.y <= -10.0f)
             transform.position = StartPoint.transform.position;
