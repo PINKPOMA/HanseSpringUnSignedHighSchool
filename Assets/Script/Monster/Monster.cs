@@ -8,6 +8,7 @@ public class Monster : MonoBehaviour
 
     public void Dead()
     {
+        GameObject.FindWithTag("GameManager").GetComponent<GameManager>().MonsterCountDown();
         Destroy(gameObject);
     }
 }

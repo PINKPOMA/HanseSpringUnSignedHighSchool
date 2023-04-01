@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
       if (monsterCount <= 0)
       {
          StageClearUI.SetActive(true);
+         StageClearUI.GetComponent<ClearUI>().SetText();
       }
    }
    

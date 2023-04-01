@@ -11,11 +11,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
-    [SerializeField] private float dashSpeed;
     [SerializeField] private bool isJump;
-    [SerializeField] private bool isWall;
     [SerializeField] private bool isWallDash;
-    [SerializeField] private bool isPlayerOver;
     //[SerializeField] private PhysicsMaterial2D Friction0;
 
     private int direction;
@@ -224,15 +221,6 @@ public class PlayerController : MonoBehaviour
             var dis = collisionInfo.transform.position.x - transform.position.x;
             if(Math.Abs(dis)  >=15f)
                 transform.Translate(new Vector2(dis, 0) * 3 * Time.deltaTime);
-        }
-    }
-
-    public float dir;
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.transform.CompareTag("Wall"))
-        {
-            isWall = false;
         }
     }
 
