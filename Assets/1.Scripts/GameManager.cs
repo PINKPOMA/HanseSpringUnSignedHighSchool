@@ -15,7 +15,7 @@ public enum Game_State
 
 public class GameManager : MonoBehaviour
 {
-    public static Game_State s_GameState = Game_State.GameStart;
+    public Game_State s_GameState = Game_State.GameStart;
     public static GameManager Inst;
 
     public float clearTime;
@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour
         monsterCountText.text = $"Monster: {monsterCount}";
         if (monsterCount <= 0)
         {
+            GlobalValue.g_PlayTime += clearTime;
+            s_GameState = Game_State.GameOver;
             StageClearUI.SetActive(true);
             StageClearUI.GetComponent<ClearUI>().SetText();
         }
@@ -77,5 +79,4 @@ public class GameManager : MonoBehaviour
     {
         s_GameState = Game_State.Play;
     }
-   
 }

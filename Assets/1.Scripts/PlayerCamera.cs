@@ -52,7 +52,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (GameManager.s_GameState != Game_State.Play)
+        if (GameManager.Inst.s_GameState != Game_State.Play)
             return;
 
         float lx = mapSize.x - width;

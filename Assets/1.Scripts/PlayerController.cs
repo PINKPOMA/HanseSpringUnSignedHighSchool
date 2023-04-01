@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.s_GameState != Game_State.Play)
+        if (GameManager.Inst.s_GameState != Game_State.Play)
             return;
 
         m_ColorCurTime -= Time.deltaTime;
