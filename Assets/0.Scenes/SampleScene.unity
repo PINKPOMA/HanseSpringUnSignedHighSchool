@@ -687,6 +687,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changePos: {x: 0, y: 0, z: 0}
   cam: {fileID: 519420028}
+  center: {x: 0, y: 0}
+  mapSize: {x: 10, y: 10}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

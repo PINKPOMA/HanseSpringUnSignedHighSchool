@@ -11,6 +11,18 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private Vector3 changePos;
     [SerializeField] private GameObject cam;
 
+    float height = 0.0f;
+    float width = 0.0f;
+
+    [SerializeField] private Vector2 center;
+    [SerializeField] private Vector2 mapSize;
+
+    private void Start()
+    {
+        height = Camera.main.orthographicSize;
+        width = height * Screen.width / Screen.height;
+
+    }
     private void Update()
     {
         //if (transform.position.x > maxPos.x)
@@ -41,8 +53,17 @@ public class PlayerCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(transform.position.x < cam.transform.position.x + -6.0f ||
-           cam.transform.position.x + 6.0f < transform.position.x)
+        float lx = mapSize.x - width;
+        float clampX = Mathf.Clamp(transform.position.x, center.x - lx, center.x + lx);
+
+        float ly = mapSize.y - height;
+        float clampY = Mathf.Clamp(transform.position.y, center.y - ly, center.y + ly); ;
+
+        if(transform.position.x < center.x - lx || center.x + lx < transform.position.x)
+            return;
+
+        if (transform.position.x < cam.transform.position.x + -6.0f ||
+            cam.transform.position.x + 6.0f < transform.position.x)
         {
             cam.transform.DOLocalMoveX(transform.position.x, 1.0f);
         }

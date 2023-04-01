@@ -147,12 +147,6 @@ public class PlayerController : MonoBehaviour
         if (isWallDash) return;
         h = Input.GetAxis("Horizontal");
 
-        //바닥에 매몰되어 있을 경우(오브젝트 색 변경시 껴서 땅 아래 위치에 놓여질 경우)
-        if(transform.position.y <= - 4.0f)
-        {
-            transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
-        }
-
         #region ---- 수정 전
         //if(0.1f < m_FrictionTime)
         //{
