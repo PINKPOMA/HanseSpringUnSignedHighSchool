@@ -134,25 +134,22 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && !isJump) 
         {
-            Debug.Log("1");
             Instantiate(jumpParticleSystem, new Vector3(transform.position.x, transform.position.y - 0.5f),
                 Quaternion.identity);
             m_JumpCount++;
             _rigidbody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
             //_rigidbody.sharedMaterial = Friction0;
             isJump = true;
-            Debug.Log(m_JumpCount);
             Invoke("JumpCount_Down", 1.0f);
         }
         else if(Input.GetKeyDown(KeyCode.Space) && isJump && m_JumpCount == 1)
         {
-            Debug.Log("2");
             Instantiate(doubleJump, new Vector3(transform.position.x, transform.position.y - 0.5f),
                 Quaternion.identity);
+            
             m_JumpCount++;
             //_rigidbody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 9.0f);
-            Debug.Log(m_JumpCount);
             //Invoke("JumpCount_Down", 1.0f);
         }
 

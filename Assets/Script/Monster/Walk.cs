@@ -41,7 +41,7 @@ public class Walk : Monster
 
         transform.Translate(Vector3.left  * moveSpeed * Time.deltaTime);
 
-        if (!Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius))
+        if (!Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius) || Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius).CompareTag("EndWall"))
         {
             transform.Rotate(0f, 180f, 0f);
         }
