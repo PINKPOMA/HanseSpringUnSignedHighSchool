@@ -19,17 +19,17 @@ TagManager:
   - 
   - Water
   - UI
-  - Yellow
-  - Green
-  - Red
-  - Blue
+  - PlayerYellow
+  - PlayerRed
+  - PlayerBlue
+  - 
   - Enemy
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - EnemyYellow
+  - EnemyRed
+  - EnemyBlue
+  - ObjectYellow
+  - ObjectRed
+  - ObjectBlue
   - 
   - 
   - 

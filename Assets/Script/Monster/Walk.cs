@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class Walk : Monster
 {
     private SpriteRenderer _sprite;
+    private bool isFlip;
     private int _dir = -1;
 
     private void Start()
@@ -25,14 +26,28 @@ public class Walk : Monster
         
     }
 
-   private void OnCollisionEnter2D(Collision2D col)
+   private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.transform.CompareTag("Ground"))
+        if (col.transform.CompareTag("Ground") && !isFlip)
         {
-            FlipObject();
+            StartCoroutine(Delay());
         }
     }
 
+   private IEnumerator Delay()
+   {
+       isFlip = true;
+       FlipObject();
+       yield return new WaitForSeconds(0.25f);
+       isFlip = false;
+   }
+   private void OnTriggerExit2D(Collider2D other)
+   {
+       if (other.CompareTag("Ground")&& !isFlip)  
+       {
+           StartCoroutine(Delay());
+       }
+   }
     public void FlipObject()
     {
         _sprite.flipX = true;

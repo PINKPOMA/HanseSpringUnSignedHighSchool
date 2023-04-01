@@ -86,9 +86,9 @@ public class PlayerController : MonoBehaviour
         if (m_CurColorNum == 0)
             gameObject.layer = 6;
         else if (m_CurColorNum == 1)
-            gameObject.layer = 9;
-        else if (m_CurColorNum == 2)
             gameObject.layer = 8;
+        else if (m_CurColorNum == 2)
+            gameObject.layer = 7;
 
         
         m_CurColorNum++;

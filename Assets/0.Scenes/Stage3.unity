@@ -6497,7 +6497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7175270461297575381, guid: 32343f5d24956164ea982db6fd1e0559, type: 3}
       propertyPath: center.y
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7175270461297575381, guid: 32343f5d24956164ea982db6fd1e0559, type: 3}
       propertyPath: mapSize.x
