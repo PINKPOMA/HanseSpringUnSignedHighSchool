@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -41,6 +42,10 @@ public class PlayerController : MonoBehaviour
     private Vector2 wallDashPos = Vector2.zero;
    [SerializeField] private int m_JumpCount = 0;
    [SerializeField] private ParticleSystem dustParticleSystem;
+   [SerializeField] private ParticleSystem landingParticleSystem;
+   [SerializeField] private ParticleSystem jumpParticleSystem;
+   [SerializeField] private ParticleSystem hitParticleSystem;
+   [SerializeField] private GameObject doubleJump;
 
    private Animator anim = null;
 
@@ -129,6 +134,8 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && !isJump) 
         {
+            Instantiate(jumpParticleSystem, new Vector3(transform.position.x, transform.position.y - 0.5f),
+                Quaternion.identity);
             m_JumpCount++;
             _rigidbody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
             //_rigidbody.sharedMaterial = Friction0;
@@ -138,6 +145,8 @@ public class PlayerController : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.Space) && isJump)
         {
+            Instantiate(doubleJump, new Vector3(transform.position.x, transform.position.y - 0.5f),
+                Quaternion.identity);
             m_JumpCount++;
             _rigidbody.AddForce(Vector2.up * (jumpSpeed / 2.0f), ForceMode2D.Impulse);
             Debug.Log(m_JumpCount);
@@ -277,12 +286,15 @@ public class PlayerController : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Ground"))
         {
+            Instantiate(landingParticleSystem, new Vector3(transform.position.x, transform.position.y - 0.5f),
+                Quaternion.identity);
             isJump = false;
             ////_rigidbody.sharedMaterial = null;
             //m_JumpCount = 0;
         }
         if (col.CompareTag("Enemy"))
         {
+            Instantiate(hitParticleSystem, col.transform.position, quaternion.identity);
             col.GetComponent<Monster>().Dead();
             _rigidbody.AddForce(Vector2.up * 7, ForceMode2D.Impulse);
             //_rigidbody.sharedMaterial = Friction0;

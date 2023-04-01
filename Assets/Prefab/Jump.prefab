@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5633877767243994741}
   - component: {fileID: 5633877767243994698}
   - component: {fileID: 5633877767243994699}
+  - component: {fileID: 1594601533447806294}
   m_Layer: 0
   m_Name: Jump
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5633877767243994696}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1979.169, y: 432.87088, z: -10.180556}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -106,3 +107,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1594601533447806294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5633877767243994696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6dae07c505b824e9a0dea4c2a467cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -482,8 +482,9 @@ MonoBehaviour:
   m_JumpCount: 0
   dustParticleSystem: {fileID: 3555083833984417269}
   landingParticleSystem: {fileID: 6352597649359647001, guid: 98f87e86dcf69b243b89f9d6fd22f142, type: 3}
-  hitParticleSystem: {fileID: 8327198181809379165, guid: c01a0071cd890e64b8b95ffcad2e450a, type: 3}
   jumpParticleSystem: {fileID: 2408134616827203468, guid: 4219777c9ef474345ad5f72222463aed, type: 3}
+  hitParticleSystem: {fileID: 8327198181809379165, guid: c01a0071cd890e64b8b95ffcad2e450a, type: 3}
+  doubleJump: {fileID: 5633877767243994696, guid: ff0996b89f64fcd4eb6add7f26368bb6, type: 3}
 --- !u!114 &7175270461297575381
 MonoBehaviour:
   m_ObjectHideFlags: 0
