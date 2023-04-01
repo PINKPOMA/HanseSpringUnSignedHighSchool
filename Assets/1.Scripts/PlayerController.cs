@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Inst;
+
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
     [SerializeField] private bool isJump;
@@ -44,6 +46,10 @@ public class PlayerController : MonoBehaviour
 
     private float h;
 
+    private void Awake()
+    {
+        Inst = this;
+    }
     void Start()
     {
         _rigidbody = gameObject.GetComponent<Rigidbody2D>();
@@ -64,24 +70,24 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Inst.s_GameState != Game_State.Play)
             return;
 
-        m_ColorCurTime -= Time.deltaTime;
+        //m_ColorCurTime -= Time.deltaTime;
 
-        if (ColorGageBar != null)
-            ColorGageBar.fillAmount = m_ColorCurTime / m_ColorChangeTime;
+        //if (ColorGageBar != null)
+        //    ColorGageBar.fillAmount = m_ColorCurTime / m_ColorChangeTime;
 
-        if (m_ColorCurTime <= 0.0f)
-        {
-            ColorChange();
-        }
+        //if (m_ColorCurTime <= 0.0f)
+        //{
+        //    ColorChange();
+        //}
 
         Move();
         Jump();
         
     }
 
-    private void ColorChange()
+    public void ColorChange()
     {
-        m_ColorCurTime = m_ColorChangeTime;
+        //m_ColorCurTime = m_ColorChangeTime;
 
         // //노 파 빨 순으로 순환
         Cur_Color = m_ColorList[m_CurColorNum];

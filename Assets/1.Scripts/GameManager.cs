@@ -65,18 +65,21 @@ public class GameManager : MonoBehaviour
     public void OpenStartImage()
     {
         Game_Start.SetActive(true);
-        Invoke("GameStart", 2.0f);
+        s_GameState = Game_State.Play;
+        CameraCanvas.Inst.BG_Start();
+        Invoke("GameStart", 0.5f);
     }
 
     void GameStart()
     {
         Game_Start.GetComponent<Image>().DOFade(0.0f, 1.5f);
         Game_Spring.GetComponent<Image>().DOFade(0.0f, 1.5f);
-        Invoke("Play", 1.0f);
+        //Invoke("Play", 1.0f);
     }
 
-    void Play()
-    {
-        s_GameState = Game_State.Play;
-    }
+    //void Play()
+    //{
+    //    s_GameState = Game_State.Play;
+    //    CameraCanvas.Inst.BG_Start();
+    //}
 }
