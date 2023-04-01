@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
@@ -204,6 +205,15 @@ public class PlayerController : MonoBehaviour
             //direction = col.contacts[0].point - (Vector2)transform.position;
             //direction = direction.normalized;
             isWall = true;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collisionInfo)
+    {
+        if (collisionInfo.transform.CompareTag("Wall"))
+        {
+            var dis = collisionInfo.transform.position.x - transform.position.x;
+            transform.Translate(new Vector2(dis, 0) * 3 * Time.deltaTime);
         }
     }
 
