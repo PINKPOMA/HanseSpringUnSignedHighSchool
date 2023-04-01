@@ -123,6 +123,7 @@ public class PlayerController : MonoBehaviour
             _rigidbody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
             //_rigidbody.sharedMaterial = Friction0;
             isJump = true;
+            Invoke("JumpCount_Down", 1.0f);
         }
         //else if (Input.GetKeyDown(KeyCode.Space) && isWall)
         //{
@@ -139,24 +140,15 @@ public class PlayerController : MonoBehaviour
         //}
     }
 
-    private IEnumerator WallDash()
+    private void JumpCount_Down()
     {
-        isWallDash = true;
-        //_rigidbody.AddForce(Vector2.right * -h * jumpSpeed, ForceMode2D.Impulse);
-       // _rigidbody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
-        _rigidbody.velocity = wallDashPos;
-        //_rigidbody.sharedMaterial = Friction0;
-        yield return new WaitForSeconds(0.75f);   
-        isWallDash = false;
-        isJump = true;
+        m_JumpCount--;
     }
-    
+
     private void Move()
     {                                                                                                                                                                                                                   
         if (isWallDash) return;
         h = Input.GetAxis("Horizontal");
-
-        
 
         if (0 < h)
         {
@@ -258,8 +250,8 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.CompareTag("Ground"))
         {
             isJump = false;
-            //_rigidbody.sharedMaterial = null;
-            m_JumpCount = 0;
+            ////_rigidbody.sharedMaterial = null;
+            //m_JumpCount = 0;
         }
         if (col.CompareTag("Enemy"))
         {

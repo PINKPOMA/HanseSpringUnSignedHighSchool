@@ -16,6 +16,11 @@ public class Fly : Monster
     private void Update()
     {
         transform.Translate(movePos * Time.deltaTime * moveSpeed);
+
+        if (0 < movePos.x)
+            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        else if(movePos.x < 0)
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
     }
 
     private void OnCollisionEnter2D(Collision2D col)
