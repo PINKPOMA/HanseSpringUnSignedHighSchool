@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6243997838618298361}
   - component: {fileID: 6243997838618298341}
   - component: {fileID: 6243997838618298342}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Monster
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 6243997838796622248}
   - component: {fileID: 6243997838796622249}
   - component: {fileID: 6243997838796622250}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 6243997839331017454}
   - component: {fileID: 6243997839331017453}
   - component: {fileID: 6243997839331017452}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}

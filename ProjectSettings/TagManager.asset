@@ -10,6 +10,7 @@ TagManager:
   - Yellow
   - Enemy
   - Wall
+  - EndWall
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Green
   - Red
   - Blue
-  - 
+  - Enemy
   - 
   - 
   - 

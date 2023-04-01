@@ -2,14 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Fly : Monster
 {
     private Vector2 movePos;
-    private Vector2 targetPos;
     private void Start()
     {
-        StartCoroutine(Flying());
+        // movePos = new Vector2(Random.Range(1, 3) == 1 ? -1 : 1, Random.Range(1, 3) == 1 ? -1 : 1);
+        movePos = Vector2.up;
     }
 
     private void Update()
@@ -17,19 +18,19 @@ public class Fly : Monster
         transform.Translate(movePos * Time.deltaTime * moveSpeed);
     }
 
-    private IEnumerator Flying()
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        movePos = Vector2.down;
-        yield return new WaitForSeconds(1f);
-        movePos = Vector2.up;
-        yield return new WaitForSeconds(1f);
-        StartCoroutine(Flying());
-    }
-
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        StopCoroutine(Flying());
-        targetPos = col.transform.position;
-        
+        if (col.transform.CompareTag("EndWall"))
+        {
+            movePos = transform.position - GameObject.FindWithTag("Player").transform.position;
+            movePos.Normalize();
+            movePos *= -1;
+        }
+        else
+        {
+            var direction = col.contacts[0].point - (Vector2)transform.position;
+            direction = direction.normalized;
+            movePos = direction * -1;
+        }
     }
 }
