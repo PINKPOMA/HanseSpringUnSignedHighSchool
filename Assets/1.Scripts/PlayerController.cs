@@ -290,7 +290,10 @@ public class PlayerController : MonoBehaviour
                 Quaternion.identity);
             isJump = false;
             ////_rigidbody.sharedMaterial = null;
-            //m_JumpCount = 0;
+            
+            if(_rigidbody.velocity.y < 0.1f)
+                m_JumpCount = 0;
+
         }
         if (col.CompareTag("Enemy"))
         {
