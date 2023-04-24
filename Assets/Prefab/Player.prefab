@@ -504,8 +504,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab03b1cdb36b7e44fa7333dcaaf113d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
-  jumpSpeed: 18
+  moveSpeed: 12
+  jumpSpeed: 24
   isJump: 0
   isWallDash: 0
   ColorGageBar: {fileID: 7175270461118929208}
